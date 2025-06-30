@@ -4,6 +4,7 @@ type Customer = {
   email?: string;
   phoneNumber?: string;
   address?: string;
+  id: string;
 };
 
 interface CustomersListProps {
@@ -42,42 +43,40 @@ export default function CustomersList({ events }: CustomersListProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      {events.map((event) => (
-                        <>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              {event.firstName} {event.lastName}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              {event.email}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              {event.phoneNumber}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="text-xs font-weight-bold mb-0">
-                              {event.address}
-                            </p>
-                          </td>
-                          <td className="align-middle">
-                            <a
-                              href="javascript:;"
-                              className="text-secondary font-weight-bold text-xs"
-                              data-toggle="tooltip"
-                              data-original-title="Edit user"
-                            >
-                              Edit
-                            </a>
-                          </td>
-                        </>
-                      ))}
-                    </tr>
+                    {events.map((event) => (
+                      <tr key={event.id}>
+                        <td className="align-middle">
+                          <p className="text-xs font-weight-bold mb-0">
+                            {event.firstName} {event.lastName}
+                          </p>
+                        </td>
+                        <td className="align-middle">
+                          <p className="text-xs font-weight-bold mb-0">
+                            {event.email}
+                          </p>
+                        </td>
+                        <td className="align-middle">
+                          <p className="text-xs font-weight-bold mb-0">
+                            {event.phoneNumber}
+                          </p>
+                        </td>
+                        <td className="align-middle">
+                          <p className="text-xs font-weight-bold mb-0">
+                            {event.address}
+                          </p>
+                        </td>
+                        <td className="align-middle">
+                          <a
+                            href="javascript:;"
+                            className="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="Edit user"
+                          >
+                            Edit
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

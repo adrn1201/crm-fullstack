@@ -3,7 +3,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/Root";
 import CustomersRootLayout from "./pages/CustomersRootLayout";
-import CustomersPage from "./pages/CustomerPage";
+import CustomersPage, { loader as customersLoader} from "./pages/CustomerPage";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <CustomersPage />,
-            // loader: eventsLoader,
+            loader: customersLoader,
           },
         ]
       },

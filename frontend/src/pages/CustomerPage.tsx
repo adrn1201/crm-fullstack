@@ -12,3 +12,17 @@ export default function CustomersPage() {
     </Suspense>
   );
 }
+
+async function loadCustomers() {
+  const response = await fetch("http://localhost:3000/api/customers");
+  if (!response.ok) {
+    throw new Error("Failed to fetch customers");
+  }
+  return response.json();
+} 
+
+export function loader() {
+  return {
+    customers: loadCustomers(),
+  };
+}
