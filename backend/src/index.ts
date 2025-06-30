@@ -1,11 +1,13 @@
 import express from 'express';
 import mongoose from "mongoose";
 import customerRoutes from "./routes/customers";
+import cors from 'cors';
 
 const app = express();
 
 
 app.use(express.json());
+app.use(cors());
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/crm';
 mongoose.connect(dbUrl);
