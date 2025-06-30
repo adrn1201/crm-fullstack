@@ -3,6 +3,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/Root";
 import CustomersRootLayout from "./pages/CustomersRootLayout";
+import CustomersPage from "./pages/CustomerPage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,13 @@ const router = createBrowserRouter([
       {
         path: "customers",
         element: <CustomersRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <CustomersPage />,
+            // loader: eventsLoader,
+          },
+        ]
       },
     ],
   },
