@@ -8,10 +8,10 @@ type Customer = {
 };
 
 interface CustomersListProps {
-  events: Customer[];
+  customers: Customer[];
 }
 
-export default function CustomersList({ events }: CustomersListProps) {
+export default function CustomersList({ customers }: CustomersListProps) {
   return (
     <div className="container-fluid py-2">
       <div className="row">
@@ -51,7 +51,7 @@ export default function CustomersList({ events }: CustomersListProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {events.map((event) => (
+                    {customers.map((event) => (
                       <tr key={event.id}>
                         <td className="align-middle">
                           <p className="text-xs font-weight-bold mb-0">

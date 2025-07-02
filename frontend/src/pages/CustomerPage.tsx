@@ -1,13 +1,13 @@
 import { useLoaderData, Await } from "react-router-dom";
-import CustomersList from "../components/CustomersList";
 import { Suspense } from "react";
+import CustomerDetail from "../components/CustomerDetail";
 
 export default function CustomersPage() {
-  const { customers } = useLoaderData();
+  const { customer } = useLoaderData();
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      <Await resolve={customers}>
-        {(loadedCustomers) => <CustomersList events={loadedCustomers} />}
+      <Await resolve={customer}>
+        {(loadedCustomer) => <CustomerDetail customer={loadedCustomer} />}
       </Await>
     </Suspense>
   );
@@ -23,6 +23,6 @@ async function loadCustomers() {
 
 export function loader() {
   return {
-    customers: loadCustomers(),
+    customer: loadCustomers(),
   };
 }

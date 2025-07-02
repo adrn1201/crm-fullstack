@@ -4,7 +4,10 @@ import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/Root";
 import CustomersRootLayout from "./pages/CustomersRootLayout";
 import CustomersPage, { loader as customersLoader } from "./pages/CustomerPage";
-import NewCustomerPage, { action as customerAction} from "./pages/NewCustomerPage";
+import CustomerDetailsPage, {loader as customerDetailLoader} from "./pages/CustomerDetailsPage";
+import NewCustomerPage, {
+  action as customerAction,
+} from "./pages/NewCustomerPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,17 @@ const router = createBrowserRouter([
             path: "new",
             element: <NewCustomerPage />,
             action: customerAction,
+          },
+          {
+            path: ":customerId",
+            id: "customer-detail",
+            loader: customerDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <CustomerDetailsPage />,
+              },
+            ]
           },
         ],
       },
