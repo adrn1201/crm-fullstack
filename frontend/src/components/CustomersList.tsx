@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 type Customer = {
   firstName: string;
   lastName: string;
   email?: string;
   phoneNumber?: string;
   address?: string;
-  id: string;
+  _id: string;
 };
 
 interface CustomersListProps {
@@ -23,10 +25,10 @@ export default function CustomersList({ customers }: CustomersListProps) {
                   <h6 className="mb-0">Payment Method</h6>
                 </div>
                 <div className="col-6 text-end">
-                  <a className="btn bg-gradient-dark mb-0" href="javascript:;">
+                  <Link className="btn bg-gradient-dark mb-0" to="/customers/new">
                     <i className="material-symbols-rounded text-sm">add</i>
-                    &nbsp;&nbsp;Add New Card
-                  </a>
+                    &nbsp;&nbsp;Add New Customer
+                  </Link>
                 </div>
               </div>
             </div>
@@ -51,37 +53,46 @@ export default function CustomersList({ customers }: CustomersListProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {customers.map((event) => (
-                      <tr key={event.id}>
+                    {customers.map((customer) => (
+                      <tr key={customer._id}>
                         <td className="align-middle">
                           <p className="text-xs font-weight-bold mb-0">
-                            {event.firstName} {event.lastName}
+                            {customer.firstName} {customer.lastName}
                           </p>
                         </td>
                         <td className="align-middle">
                           <p className="text-xs font-weight-bold mb-0">
-                            {event.email}
+                            {customer.email}
                           </p>
                         </td>
                         <td className="align-middle">
                           <p className="text-xs font-weight-bold mb-0">
-                            {event.phoneNumber}
+                            {customer.phoneNumber}
                           </p>
                         </td>
                         <td className="align-middle">
                           <p className="text-xs font-weight-bold mb-0">
-                            {event.address}
+                            {customer.address}
                           </p>
                         </td>
                         <td className="align-middle">
-                          <a
-                            href="javascript:;"
+                          <Link
+                            to={`/customers/${customer._id}`}
+                            className="text-secondary font-weight-bold text-xs"
+                            data-toggle="tooltip"
+                            data-original-title="View details"
+                          >
+                            Details
+                          </Link>
+                          {" | "}
+                          <Link
+                            to={`/customers/${customer._id}/edit`}
                             className="text-secondary font-weight-bold text-xs"
                             data-toggle="tooltip"
                             data-original-title="Edit user"
                           >
                             Edit
-                          </a>
+                          </Link>
                         </td>
                       </tr>
                     ))}

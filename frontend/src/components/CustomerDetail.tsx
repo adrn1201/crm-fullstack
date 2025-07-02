@@ -1,5 +1,6 @@
 // import classes from "./EventItem.module.css";
 // import { Link, useSubmit } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface CustomerDetailProps {
   customer: {
@@ -12,8 +13,13 @@ interface CustomerDetailProps {
 }
 
 function CustomerDetail({ customer }: CustomerDetailProps) {
-  console.log(customer);
-//   const submit = useSubmit();
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate("..");
+  };
+
+  //   const submit = useSubmit();
   //   function startDeleteHandler() {
   //     const proceed = window.confirm("Are you sure?");
 
@@ -40,6 +46,9 @@ function CustomerDetail({ customer }: CustomerDetailProps) {
       <p>
         <strong>Address:</strong> {customer.address}
       </p>
+      <button className="btn btn-secondary" onClick={handleCancel}>
+        Cancel
+      </button>
     </div>
   );
 }
