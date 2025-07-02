@@ -16,10 +16,18 @@ export default function CustomersList({ events }: CustomersListProps) {
     <div className="container-fluid py-2">
       <div className="row">
         <div className="col-12">
-          <div className="card my-4">
-            <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div className="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                <h6 className="text-white text-capitalize ps-3">Customers</h6>
+          <div className="card mt-4">
+            <div className="card-header pb-0 p-3">
+              <div className="row">
+                <div className="col-6 d-flex align-items-center">
+                  <h6 className="mb-0">Payment Method</h6>
+                </div>
+                <div className="col-6 text-end">
+                  <a className="btn bg-gradient-dark mb-0" href="javascript:;">
+                    <i className="material-symbols-rounded text-sm">add</i>
+                    &nbsp;&nbsp;Add New Card
+                  </a>
+                </div>
               </div>
             </div>
             <div className="card-body px-0 pb-2">

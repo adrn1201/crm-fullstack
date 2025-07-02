@@ -3,7 +3,8 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/Root";
 import CustomersRootLayout from "./pages/CustomersRootLayout";
-import CustomersPage, { loader as customersLoader} from "./pages/CustomerPage";
+import CustomersPage, { loader as customersLoader } from "./pages/CustomerPage";
+import NewCustomerPage, { action as customerAction} from "./pages/NewCustomerPage";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,12 @@ const router = createBrowserRouter([
             element: <CustomersPage />,
             loader: customersLoader,
           },
-        ]
+          {
+            path: "new",
+            element: <NewCustomerPage />,
+            action: customerAction,
+          },
+        ],
       },
     ],
   },
