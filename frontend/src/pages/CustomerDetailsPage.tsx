@@ -57,3 +57,24 @@ export async function loader({
     customer: await loadCustomer(id),
   };
 }
+
+export async function action({ params, request }: LoaderFunctionArgs) {
+  const id = params.customerId;
+
+  const response = await fetch("http://localhost:3000/api/customers/" + id, {
+    method: request.method,
+  });
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({
+        message: "Could not delete customer.",
+      }),
+      {
+        status: 500,
+      }
+    );
+  } else {
+    return redirect("/customers");
+  }
+}

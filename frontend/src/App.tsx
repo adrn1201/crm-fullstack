@@ -6,6 +6,7 @@ import CustomersRootLayout from "./pages/CustomersRootLayout";
 import CustomersPage, { loader as customersLoader } from "./pages/CustomerPage";
 import CustomerDetailsPage, {
   loader as customerDetailLoader,
+  action as deleteCustomerAction,
 } from "./pages/CustomerDetailsPage";
 import NewCustomerPage, {
   action as customerAction,
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <CustomerDetailsPage />,
+                action: deleteCustomerAction,
               },
               {
                 path: "edit",
