@@ -8,127 +8,142 @@ import {
 import type { ActionFunctionArgs } from "react-router-dom";
 
 interface CustomerFormProps {
-  method:
-    | "post"
-    | "get"
-    | "put"
-    | "delete"
-    | "POST"
-    | "GET"
-    | "PUT"
-    | "DELETE";
+  method: "post" | "get" | "put" | "delete" | "POST" | "GET" | "PUT" | "DELETE";
   event?: any;
 }
 
 export default function CustomerForm({ method, event }: CustomerFormProps) {
   const data = useActionData();
   const navigate = useNavigate();
-
   const navigation = useNavigation();
-
   const isSubmitting = navigation.state === "submitting";
 
   function cancelHandler() {
     navigate("..");
   }
+
   return (
-    <Form method={method} className="row g-3">
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={String(err)}>{String(err)}</li>
-          ))}
-        </ul>
-      )}
-      <div className="row">
-        <div className="col-md-6">
-          <div className="input-group input-group-outline my-3">
-            <label htmlFor="firstName" className="form-label">
-              First Name
-            </label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              className="form-control"
-              defaultValue={event?.firstName || ""}
-            />
-          </div>
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div
+        className="card shadow-lg p-4"
+        style={{ minWidth: 400, maxWidth: 500, width: "100%" }}
+      >
+        <div className="card-header bg-white border-0 text-center pb-0">
+          <h3 className="font-weight-bold mb-2">
+            {method === "post" || method === "POST"
+              ? "Add Customer"
+              : "Edit Customer"}
+          </h3>
+          <p className="mb-0 text-muted">Enter customer details below</p>
         </div>
-        <div className="col-md-6">
-          <div className="input-group input-group-outline my-3">
-            <label htmlFor="lastName" className="form-label">
-              Last Name
-            </label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              className="form-control"
-              defaultValue={event?.lastName || ""}
-            />
-          </div>
+        <div className="card-body">
+          <Form method={method} className="row g-3">
+            {data && data.errors && (
+              <ul className="alert alert-danger">
+                {Object.values(data.errors).map((err) => (
+                  <li key={String(err)}>{String(err)}</li>
+                ))}
+              </ul>
+            )}
+            <div className="col-12 mb-3">
+              <label htmlFor="firstName" className="form-label">
+                First Name
+              </label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                className="form-control border rounded px-3 py-2"
+                style={{ background: "#f8f9fa" }}
+                defaultValue={event?.firstName || ""}
+                placeholder="Enter first name"
+                required
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                className="form-control border rounded px-3 py-2"
+                style={{ background: "#f8f9fa" }}
+                defaultValue={event?.lastName || ""}
+                placeholder="Enter last name"
+                required
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                className="form-control border rounded px-3 py-2"
+                style={{ background: "#f8f9fa" }}
+                defaultValue={event?.email || ""}
+                placeholder="Enter email address"
+                required
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="phoneNumber" className="form-label">
+                Phone Number
+              </label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="text"
+                className="form-control border rounded px-3 py-2"
+                style={{ background: "#f8f9fa" }}
+                defaultValue={event?.phoneNumber || ""}
+                placeholder="Enter phone number"
+                required
+              />
+            </div>
+            <div className="col-12 mb-3">
+              <label htmlFor="address" className="form-label">
+                Address
+              </label>
+              <textarea
+                id="address"
+                name="address"
+                className="form-control border rounded px-3 py-2"
+                style={{ background: "#f8f9fa" }}
+                defaultValue={event?.address || ""}
+                placeholder="Enter address"
+                rows={2}
+                required
+              />
+            </div>
+            <div className="col-12 d-flex justify-content-between mt-3">
+              <button
+                type="button"
+                className="btn btn-outline-secondary px-4"
+                onClick={cancelHandler}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+              <button
+                disabled={isSubmitting}
+                className="btn btn-dark px-4"
+                type="submit"
+              >
+                {isSubmitting ? "Submitting..." : "Save"}
+              </button>
+            </div>
+          </Form>
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="input-group input-group-outline my-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className="form-control"
-              defaultValue={event?.email || ""}
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="input-group input-group-outline my-3">
-            <label htmlFor="phoneNumber" className="form-label">
-              Phone Number
-            </label>
-            <input
-              id="phoneNumber"
-              name="phoneNumber"
-              type="text"
-              className="form-control"
-              defaultValue={event?.phoneNumber || ""}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <div className="input-group input-group-outline my-3">
-            <label htmlFor="address" className="form-label">
-              Address
-            </label>
-            <textarea
-              id="address"
-              name="address"
-              className="form-control"
-              defaultValue={event?.address || ""}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <button
-          type="button"
-          className="col-md-3 btn btn-danger"
-          onClick={cancelHandler}
-          disabled={isSubmitting}
-        >
-          Cancel
-        </button>
-        <button disabled={isSubmitting} className="col-md-3 btn btn-success">
-          {isSubmitting ? "Submitting" : "Save"}
-        </button>
-      </div>
-    </Form>
+    </div>
   );
 }
 

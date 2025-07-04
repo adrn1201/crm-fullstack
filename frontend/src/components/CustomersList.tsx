@@ -22,7 +22,7 @@ export default function CustomersList({ customers }: CustomersListProps) {
             <div className="card-header pb-0 p-3">
               <div className="row">
                 <div className="col-6 d-flex align-items-center">
-                  <h6 className="mb-0">Payment Method</h6>
+                  <h6 className="mb-0">Customers</h6>
                 </div>
                 <div className="col-6 text-end">
                   <Link className="btn bg-gradient-dark mb-0" to="/customers/new">
@@ -37,10 +37,10 @@ export default function CustomersList({ customers }: CustomersListProps) {
                 <table className="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Full Name
                       </th>
-                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                         Email
                       </th>
                       <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -49,33 +49,33 @@ export default function CustomersList({ customers }: CustomersListProps) {
                       <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Address
                       </th>
-                      <th className="text-secondary opacity-7"></th>
+                      <th className="text-center text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
                     {customers.map((customer) => (
                       <tr key={customer._id}>
-                        <td className="align-middle">
+                        <td className="align-middle text-center">
                           <p className="text-xs font-weight-bold mb-0">
                             {customer.firstName} {customer.lastName}
                           </p>
                         </td>
-                        <td className="align-middle">
+                        <td className="align-middle text-center">
                           <p className="text-xs font-weight-bold mb-0">
                             {customer.email}
                           </p>
                         </td>
-                        <td className="align-middle">
+                        <td className="align-middle text-center">
                           <p className="text-xs font-weight-bold mb-0">
                             {customer.phoneNumber}
                           </p>
                         </td>
-                        <td className="align-middle">
+                        <td className="align-middle text-center">
                           <p className="text-xs font-weight-bold mb-0">
                             {customer.address}
                           </p>
                         </td>
-                        <td className="align-middle">
+                        <td className="align-middle text-center">
                           <Link
                             to={`/customers/${customer._id}`}
                             className="text-secondary font-weight-bold text-xs"

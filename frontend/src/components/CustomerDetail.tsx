@@ -1,6 +1,4 @@
-// import classes from "./EventItem.module.css";
-import { useSubmit } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useSubmit, useNavigate } from "react-router-dom";
 
 interface CustomerDetailProps {
   customer: {
@@ -14,43 +12,63 @@ interface CustomerDetailProps {
 
 function CustomerDetail({ customer }: CustomerDetailProps) {
   const navigate = useNavigate();
- const submit = useSubmit();
+  const submit = useSubmit();
+
   const handleCancel = () => {
     navigate("..");
   };
 
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
-
     if (proceed) {
       submit(null, { method: "DELETE" });
     }
   }
-  
+
   return (
-    <div className="customer-detail">
-      <h2>Customer Details</h2>
-      <p>
-        <strong>First Name:</strong> {customer.firstName}
-      </p>
-      <p>
-        <strong>Last Name:</strong> {customer.lastName}
-      </p>
-      <p>
-        <strong>Email:</strong> {customer.email}
-      </p>
-      <p>
-        <strong>Phone Number:</strong> {customer.phoneNumber}
-      </p>
-      <p>
-        <strong>Address:</strong> {customer.address}
-      </p>
-      <button className="btn btn-secondary" onClick={handleCancel}>
-        Cancel
-      </button>
-      <button className="btn btn-danger" onClick={startDeleteHandler}>
-        Delete
-      </button>
+    <div
+      className="d-flex justify-content-center align-items-start"
+      style={{ minHeight: "100vh", paddingTop: "6rem" }} // align-items-start and paddingTop to move card up
+    >
+      <div
+        className="card shadow-lg p-4"
+        style={{ minWidth: 400, maxWidth: 500, width: "100%" }}
+      >
+        <div className="card-header bg-white border-0 text-center pb-0">
+          <h2 className="font-weight-bold mb-3">Customer Details</h2>
+        </div>
+        <div className="card-body">
+          <div className="mb-3">
+            <strong>First Name:</strong> <span>{customer.firstName}</span>
+          </div>
+          <div className="mb-3">
+            <strong>Last Name:</strong> <span>{customer.lastName}</span>
+          </div>
+          <div className="mb-3">
+            <strong>Email:</strong> <span>{customer.email}</span>
+          </div>
+          <div className="mb-3">
+            <strong>Phone Number:</strong> <span>{customer.phoneNumber}</span>
+          </div>
+          <div className="mb-4">
+            <strong>Address:</strong> <span>{customer.address}</span>
+          </div>
+          <div className="d-flex justify-content-between">
+            <button
+              className="btn btn-outline-secondary px-4"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-danger px-4"
+              onClick={startDeleteHandler}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
