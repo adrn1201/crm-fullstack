@@ -5,9 +5,18 @@ import {
   useNavigate,
   redirect,
 } from "react-router-dom";
+import type { ActionFunctionArgs } from "react-router-dom";
 
 interface CustomerFormProps {
-  method: "post" | "get" | "POST" | "GET";
+  method:
+    | "post"
+    | "get"
+    | "put"
+    | "delete"
+    | "POST"
+    | "GET"
+    | "PUT"
+    | "DELETE";
   event?: any;
 }
 
@@ -121,4 +130,55 @@ export default function CustomerForm({ method, event }: CustomerFormProps) {
       </div>
     </Form>
   );
+}
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  const data = await request.formData();
+
+  const customerData = {
+    firstName: data.get("firstName"),
+    lastName: data.get("lastName"),
+    email: data.get("email"),
+    phoneNumber: data.get("phoneNumber"),
+    address: data.get("address"),
+  };
+
+  let url = "http://localhost:3000/api/customers";
+  let method = "POST";
+
+  if (request.method === "PUT") {
+    const customerId = params.customerId;
+    if (!customerId) {
+      throw new Response(
+        JSON.stringify({ message: "Customer ID is required for update." }),
+        { status: 400 }
+      );
+    }
+    url = `http://localhost:3000/api/customers/${customerId}`;
+    method = "PUT";
+  }
+
+  const response = await fetch(url, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(customerData),
+  });
+
+  if (response.status === 422) {
+    return response;
+  }
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({
+        message: "Could not save customer.",
+      }),
+      {
+        status: 500,
+      }
+    );
+  }
+
+  return redirect("/customers");
 }
