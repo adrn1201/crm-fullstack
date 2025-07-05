@@ -3,7 +3,6 @@ import type { LoaderFunctionArgs } from "react-router-dom";
 import { Suspense } from "react";
 import CustomerDetail from "../components/CustomerDetail";
 
-
 export default function CustomerDetailsPage() {
   const { customer } = useRouteLoaderData("customer-detail");
 
@@ -19,7 +18,8 @@ export default function CustomerDetailsPage() {
 }
 
 async function loadCustomer(id: string) {
-  const response = await fetch("http://localhost:3000/api/customers/" + id);
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const response = await fetch(`${baseUrl}/api/customers/${id}`);
 
   if (!response.ok) {
     throw new Response(
@@ -36,10 +36,7 @@ async function loadCustomer(id: string) {
   }
 }
 
-export async function loader({
-  request,
-  params,
-}: LoaderFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   const id = params.customerId;
 
   if (!id) {
@@ -61,7 +58,8 @@ export async function loader({
 export async function action({ params, request }: LoaderFunctionArgs) {
   const id = params.customerId;
 
-  const response = await fetch("http://localhost:3000/api/customers/" + id, {
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const response = await fetch(`${baseUrl}/api/customers/${id}`, {
     method: request.method,
   });
 

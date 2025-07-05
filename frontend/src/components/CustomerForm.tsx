@@ -158,7 +158,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
     address: data.get("address"),
   };
 
-  let url = "http://localhost:3000/api/customers";
+  let baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  let url = `${baseUrl}/api/customers`;
   let method = "POST";
 
   if (request.method === "PUT") {
@@ -169,7 +170,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         { status: 400 }
       );
     }
-    url = `http://localhost:3000/api/customers/${customerId}`;
+    url = `${baseUrl}/api/customers/${customerId}`;
     method = "PUT";
   }
 
