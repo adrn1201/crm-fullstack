@@ -44,14 +44,16 @@ jobs:
           fi
 
       - name: Debug Tag Output
-        run: |
+        run: | 
             echo "Using tags: ${{ steps.set-tags.outputs.tags }}"
+
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ github.repository_owner }}/crm-backend:latest
             ghcr.io/${{ github.repository_owner }}/crm-backend:${{ github.ref_name }}
@@ -62,6 +64,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ github.repository_owner }}/crm-frontend:latest
             ghcr.io/${{ github.repository_owner }}/crm-frontend:${{ github.ref_name }}
