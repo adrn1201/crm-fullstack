@@ -20,7 +20,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
   console.log("Form Data:", data);
 
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const baseUrl = window?.env?.VITE_API_URL || "http://localhost:8000";
   const response = await fetch(`${baseUrl}/api/customers`, {
     method: "POST",
     headers: {

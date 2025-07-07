@@ -18,7 +18,7 @@ export default function CustomerDetailsPage() {
 }
 
 async function loadCustomer(id: string) {
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const baseUrl = window?.env?.VITE_API_URL || "http://localhost:8000";
   const response = await fetch(`${baseUrl}/api/customers/${id}`);
 
   if (!response.ok) {
@@ -58,7 +58,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 export async function action({ params, request }: LoaderFunctionArgs) {
   const id = params.customerId;
 
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  const baseUrl = window?.env?.VITE_API_URL || "http://localhost:8000";
   const response = await fetch(`${baseUrl}/api/customers/${id}`, {
     method: request.method,
   });

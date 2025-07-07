@@ -158,7 +158,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     address: data.get("address"),
   };
 
-  let baseUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  let baseUrl = window?.env?.VITE_API_URL || "http://localhost:8000";
   let url = `${baseUrl}/api/customers`;
   let method = "POST";
 

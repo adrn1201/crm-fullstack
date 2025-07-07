@@ -14,7 +14,7 @@ export default function CustomersPage() {
 }
 
 async function loadCustomers() {
-  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const baseUrl = window?.env?.VITE_API_URL || "http://localhost:3000";
   console.log("Loading customers from:", baseUrl);
   const response = await fetch(`${baseUrl}/api/customers`);
   console.log('hello'+ response)
